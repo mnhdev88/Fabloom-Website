@@ -1,0 +1,344 @@
+/* ============================================================
+   FABLOOM — Animations & Scroll Reveals
+   ============================================================ */
+
+/* ── Reduced Motion Override ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Reveal Base States ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+}
+
+/* Visible state */
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-blur.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+/* ── Stagger delays ── */
+.stagger-1  { transition-delay: 0.05s; }
+.stagger-2  { transition-delay: 0.10s; }
+.stagger-3  { transition-delay: 0.15s; }
+.stagger-4  { transition-delay: 0.20s; }
+.stagger-5  { transition-delay: 0.25s; }
+.stagger-6  { transition-delay: 0.30s; }
+
+/* Auto-stagger for grid children */
+.stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.10s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.20s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.30s; }
+
+/* ── Hero Entrance ── */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(50px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-anim-1 { animation: hero-fade-up 0.9s var(--ease-out) 0.2s both; }
+.hero-anim-2 { animation: hero-fade-up 0.9s var(--ease-out) 0.4s both; }
+.hero-anim-3 { animation: hero-fade-up 0.9s var(--ease-out) 0.6s both; }
+.hero-anim-4 { animation: hero-fade-up 0.9s var(--ease-out) 0.8s both; }
+.hero-anim-5 { animation: hero-fade-in 1s var(--ease-out) 1.0s both; }
+
+/* ── Hero Scroll Indicator ── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(10px); opacity: 0.5; }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2s ease infinite;
+}
+
+/* ── Ken Burns (Hero image) ── */
+@keyframes ken-burns {
+  0%   { transform: scale(1) translate(0, 0); }
+  33%  { transform: scale(1.05) translate(-1%, 0.5%); }
+  66%  { transform: scale(1.08) translate(1%, -0.5%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.hero-img { animation: ken-burns 18s ease-in-out infinite; }
+
+/* ── Floating Elements ── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-15px) rotate(1deg); }
+  66%       { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes float-orbit {
+  from { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+}
+
+.float-slow   { animation: float-slow 7s ease-in-out infinite; }
+.float-medium { animation: float-medium 5s ease-in-out infinite; }
+
+/* ── Shimmer (loading skeleton) ── */
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0e8dc 25%, #e8ddd0 50%, #f0e8dc 75%);
+  background-size: 2000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* ── Red pulse ── */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192,40,42,0.3); }
+  50%       { box-shadow: 0 0 0 12px rgba(192,40,42,0); }
+}
+
+.pulse-gold { animation: gold-pulse 2.5s ease infinite; }
+
+/* ── Text shimmer ── */
+@keyframes text-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(90deg, var(--clr-red-dark), var(--clr-red-light), var(--clr-red-dark));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* ── Nav underline slide ── */
+@keyframes underline-slide {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Counter ── */
+.counter-val {
+  display: inline-block;
+  transition: none;
+}
+
+/* ── Image overlay ── */
+.img-overlay-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,10,10,0.85) 0%, rgba(15,10,10,0.2) 50%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--sp-6);
+  opacity: 0;
+  transform: translateY(100%);
+  transition-property: var(--tp-common);
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-out);
+}
+
+.img-overlay-wrap:hover .img-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Tab transition ── */
+.tab-content { display: none; }
+.tab-content.active {
+  display: block;
+  animation: tab-fade 0.4s var(--ease-out) both;
+}
+
+@keyframes tab-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Success animation ── */
+@keyframes check-draw {
+  from { stroke-dashoffset: 60; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.success-icon circle { animation: hero-fade-in 0.4s ease both; }
+.success-icon path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: check-draw 0.5s ease 0.3s both;
+}
+
+/* ── Parallax ── */
+.parallax-bg {
+  will-change: transform;
+  transition: transform 0s linear;
+}
+
+/* ── Gallery lightbox ── */
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lightbox-img-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-8);
+  opacity: 0;
+  visibility: hidden;
+  transition-property: var(--tp-reveal);
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-out);
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  animation: lightbox-img-in 0.3s var(--ease-out) both;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--sp-6);
+  right: var(--sp-6);
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-white);
+  font-size: var(--text-2xl);
+  cursor: pointer;
+  transition: background var(--dur-fast);
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Toast ── */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(20px) scale(0.95); }
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--clr-charcoal);
+  color: var(--clr-white);
+  padding: var(--sp-4) var(--sp-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-toast);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  animation: toast-in 0.4s var(--ease-out) both;
+  min-width: 280px;
+  max-width: 480px;
+}
+
+.toast.success { border-left: 4px solid #27AE60; }
+.toast.error   { border-left: 4px solid #C0392B; }
+
+/* ── Hero floating badge ── */
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(1deg); }
+}
+
+.hero-badge { animation: badge-float 4s ease-in-out infinite; }
+
+/* ── Pattern drift ── */
+@keyframes pattern-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+.bg-texture { animation: pattern-drift 20s linear infinite; }

@@ -1,0 +1,37 @@
+# A blanket wildcard block on every URL carrying a query string used to sit
+# here. It took out the whole catalogue: all 29 product pages lived on
+# /product?slug=… and every category view on /products?cat=…. Products now
+# sit on clean paths, and only the useless parameter combinations are blocked.
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /api/
+Disallow: /setup/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /?s=
+
+# Filter and pagination permutations: crawlable category views are linked
+# from the sidebar, but sorted/paged/price-filtered duplicates are not worth
+# the crawl budget.
+Disallow: /products?*sort=
+Disallow: /products?*page=
+Disallow: /products?*min_price=
+Disallow: /products?*max_price=
+
+# Crawl-delay for heavy bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.thefabloom.com/sitemap.xml

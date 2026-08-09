@@ -1,0 +1,180 @@
+/* ============================================================
+   FABLOOM — Responsive / Media Queries (Mobile-First)
+   ============================================================ */
+
+/* ── 1440px+ Large Desktop ── */
+@media (min-width: 1440px) {
+  :root { --container-max: 1360px; }
+}
+
+/* ── Below 1280px ── */
+@media (max-width: 1280px) {
+  .footer__grid { gap: var(--sp-8); }
+  .process-steps { grid-template-columns: repeat(5, 1fr); gap: var(--sp-2); }
+}
+
+/* ── Below 1024px (Tablet) ── */
+@media (max-width: 1024px) {
+  :root {
+    --nav-height: 64px;
+    --topbar-height: 36px;
+  }
+
+  /* Nav */
+  .nav-menu { display: none; }
+  .nav-cta.desktop-only { display: none; }
+  .hamburger { display: flex; }
+
+  /* Grids */
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-8) var(--sp-4); }
+  .stat-item::after { display: none; }
+
+  /* Process */
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-8);
+  }
+
+  .process-steps::before { display: none; }
+
+  /* Footer — brand full-width row, then 3 equal cols */
+  .footer__grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); }
+  .footer-brand { grid-column: 1 / -1; }
+
+  /* Team grid: 2 cols on tablet */
+  .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Section padding */
+  .section { padding-block: var(--sp-16); }
+  .section--lg { padding-block: var(--sp-20); }
+}
+
+/* ── Team grid mobile override ── */
+@media (max-width: 640px) {
+  .team-grid { grid-template-columns: 1fr !important; max-width: 360px; margin-inline: auto; }
+}
+
+/* ── Below 768px (Mobile) ── */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 60px;
+    --nav-height-shrunk: 52px;
+    --topbar-height: 0px;
+  }
+
+  /* The bar is already compact here, so the shrink is a smaller move and the
+     logo carries it rather than the height. */
+  .navbar.scrolled .navbar__logo img { height: 34px; }
+
+  /* Hero dots: smaller visual dot on mobile, hit area stays 44px */
+  .hero-dots { bottom: 1.25rem; right: 0.25rem; gap: 0; }
+  .hero-dot::before { width: 6px; height: 6px; }
+  .hero-dot.active::before { width: 18px; }
+
+  /* Hide topbar on mobile */
+  .topbar { display: none; }
+
+  /* Show sticky mobile nav */
+  .sticky-mobile-btns { display: flex; }
+
+  /* Keep the document clear of the fixed bar, home indicator included */
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Back-to-top moves up on mobile */
+  .back-to-top { bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); right: 1rem; }
+  .whatsapp-float { display: none; }
+
+  /* Typography */
+  .section-title { font-size: clamp(var(--text-2xl), 6vw, var(--text-4xl)); }
+  .section-subtitle { font-size: var(--text-base); }
+
+  /* Grids → single column */
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+
+  /* Process */
+  .process-steps {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  /* About section flex */
+  .about-split { flex-direction: column; }
+  .about-split > * { flex: none; width: 100%; }
+
+  /* Footer */
+  .footer__grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+  .footer-brand { grid-column: auto; }
+  .footer__bottom { flex-direction: column; text-align: center; }
+  /* Centre the legal links and drop the dividers — wrapped onto several rows
+     they would otherwise hang at the start of a line with nothing before them. */
+  .footer__legal { justify-content: center; text-align: center; }
+  .footer__legal a + a::before { display: none; }
+
+  /* Buttons — keep labels at 14px; 12px is below the mobile readable minimum */
+  .btn { padding: 0.75rem 1.5rem; font-size: var(--text-sm); }
+  .hero-ctas { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+
+  /* Sections */
+  .section { padding-block: var(--sp-12); }
+  .section--lg { padding-block: var(--sp-16); }
+  .section--sm { padding-block: var(--sp-8); }
+
+  /* Topbar contact → hide one item */
+  .topbar__contact .topbar-email { display: none; }
+}
+
+/* ── Below 480px (Small Mobile) ── */
+@media (max-width: 480px) {
+  :root { --container-pad: 1rem; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .section-title { font-size: var(--text-2xl); }
+
+  .review-card { padding: var(--sp-5); }
+
+  .page-hero__content h1 { font-size: var(--text-3xl); }
+
+  /* Form */
+  .form-row { flex-direction: column; }
+
+  /* Mobile menu font */
+  .mobile-nav-links a { font-size: var(--text-xl); }
+}
+
+/* ── Below 360px (Ultra Small) ── */
+@media (max-width: 360px) {
+  .stat-number { font-size: var(--text-2xl); }
+  .btn { padding: 0.625rem 1.25rem; }
+}
+
+/* ── Landscape Mobile ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section { min-height: 100svh; }
+  .mobile-menu { padding: var(--sp-4) var(--sp-6); }
+  /* Keep a 44px row even when the type shrinks in landscape */
+  .mobile-nav-links a {
+    font-size: var(--text-lg);
+    padding: var(--sp-2) 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .topbar, .navbar, .sticky-mobile-btns, .back-to-top,
+  .whatsapp-float, .mobile-menu { display: none !important; }
+
+  body { padding-bottom: 0; color: #000; background: #fff; }
+  .footer { background: #fff; color: #000; }
+
+  a::after { content: ' (' attr(href) ')'; font-size: 0.75em; color: #555; }
+}
