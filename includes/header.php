@@ -44,6 +44,14 @@ $page_schema   = $page_schema   ?? '';
   <meta name="twitter:description" content="<?= h($page_desc) ?>">
   <meta name="twitter:image" content="<?= h($page_og_image) ?>">
 
+<?php if (!empty($page_preload_image)): ?>
+  <!-- LCP image. A CSS background is only discovered after the stylesheet has
+       downloaded and parsed, by which point the browser has already lost the
+       time it would have spent fetching it. Pages set $page_preload_image to
+       hand it to the preload scanner in the first bytes of the response. -->
+  <link rel="preload" as="image" href="<?= h($page_preload_image) ?>" fetchpriority="high">
+<?php endif; ?>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

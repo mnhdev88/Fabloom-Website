@@ -23,6 +23,50 @@ Disallow: /products?*page=
 Disallow: /products?*min_price=
 Disallow: /products?*max_price=
 
+# ── AI and answer engines ─────────────────────────────────────
+# Explicitly allowed rather than left to the wildcard above. Being cited by an
+# assistant is how a mill in Bhagalpur gets found by a buyer who never types a
+# search query, so these crawlers are welcome — but the rule is written down so
+# it stays a decision rather than an accident. Each still inherits nothing from
+# "User-agent: *", so the private paths are repeated per agent.
+
+# Search and answer surfaces
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /api/
+Disallow: /setup/
+
+# Model-training crawlers. Allowed: the catalogue and the journal describe a
+# real manufacturing capability, and presence in a model's knowledge of
+# Bhagalpur textiles is worth more here than withholding it. Flip these to
+# "Disallow: /" if that judgement ever changes.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /api/
+Disallow: /setup/
+
 # Crawl-delay for heavy bots
 User-agent: AhrefsBot
 Crawl-delay: 10
@@ -35,3 +79,6 @@ Disallow: /
 
 # Sitemap location
 Sitemap: https://www.thefabloom.com/sitemap.xml
+
+# Plain-language summary of the business and its key URLs, for LLM agents:
+# https://www.thefabloom.com/llms.txt

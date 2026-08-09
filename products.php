@@ -128,8 +128,11 @@ $page_desc  = $active_cat
 // for sort/page/price permutations but wrong for ?cat=: all six category views
 // were pointing at /products, telling Google to drop the very URLs listed in
 // sitemap.xml. A valid category self-canonicalises; everything else does not.
+$_canon = $active_cat !== null
+    ? SITE_URL . '/products?cat=' . rawurlencode($active_cat['slug'])
+    : SITE_URL . '/products';
 if ($active_cat !== null) {
-    $page_canonical = SITE_URL . '/products?cat=' . rawurlencode($active_cat['slug']);
+    $page_canonical = $_canon;
 }
 // Sorted, paged and price-filtered views keep the canonical above: they are
 // duplicates of the category (or of /products) and consolidate into it. No
@@ -144,7 +147,7 @@ require_once __DIR__ . '/includes/faq.php';
 
 $_crumbs = [['name' => 'Home', 'item' => SITE_URL . '/'], ['name' => 'Products', 'item' => SITE_URL . '/products']];
 if ($active_cat !== null) {
-    $_crumbs[] = ['name' => $active_cat['name'], 'item' => $page_canonical];
+    $_crumbs[] = ['name' => $active_cat['name'], 'item' => $_canon];
 }
 
 // ItemList carries the products actually rendered on this page, in the order
@@ -180,9 +183,9 @@ $page_schema = json_encode([
     '@graph'   => [
         [
             '@type'       => 'CollectionPage',
-            '@id'         => $page_canonical ?? (SITE_URL . '/products'),
+            '@id'         => $_canon,
             'name'        => $active_cat ? $active_cat['name'] . ' Fabric' : 'Fabric Products',
-            'url'         => $page_canonical ?? (SITE_URL . '/products'),
+            'url'         => $_canon,
             'description' => $page_desc,
             'isPartOf'    => ['@type' => 'WebSite', '@id' => SITE_URL . '/#website'],
             'about'       => ['@type' => 'Organization', '@id' => SITE_URL . '/#organization'],
@@ -203,7 +206,7 @@ $page_schema = json_encode([
                 $_crumbs
             ),
         ],
-        faq_schema_node($_faqs, $page_canonical ?? (SITE_URL . '/products')),
+        faq_schema_node($_faqs, $_canon),
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
@@ -386,7 +389,13 @@ require_once __DIR__ . '/includes/header.php';
 
         <?php else: ?>
           <ul class="product-grid" role="list">
-            <?php foreach ($products as $p):
+            <?php foreach ($products as $_i => $p):
+              // The first row is above the fold on every breakpoint, so those
+              // images are the LCP candidate. Lazy-loading them defers the
+              // request until after layout, which is exactly backwards: the
+              // browser has to discover, queue and fetch them before it can
+              // paint. Everything below the first row stays lazy.
+              $_eager    = $_i < 4;
               $sale      = !empty($p['sale_price']) && (float)$p['sale_price'] < (float)$p['price'];
               $eff_price = product_price($p);
               $disc      = discount_pct($p);
@@ -402,8 +411,9 @@ require_once __DIR__ . '/includes/header.php';
                   src="<?= h($img) ?>"
                   alt="<?= h($p['name']) ?>"
                   class="product-card__img"
-                  loading="lazy"
-                  decoding="async"
+                  loading="<?= $_eager ? 'eager' : 'lazy' ?>"
+                  <?= $_eager ? 'fetchpriority="high"' : '' ?>
+                  decoding="<?= $_eager ? 'sync' : 'async' ?>"
                   onerror="this.src='<?= SITE_URL ?>/assets/images/linen-fabric-hero.webp'"
                 >
                 <?php if ($sale && $disc > 0): ?>

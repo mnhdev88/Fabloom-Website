@@ -1,9 +1,15 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
 
-$page_title = 'Fabloom – Premium Silk & Linen Fabric Manufacturer India | Handloom Textiles';
-$page_desc  = "Fabloom Group – India's finest silk and linen fabric manufacturers from Bhagalpur, Bihar. Explore handloom fabrics, block prints, digital prints &amp; custom textile solutions. Request a free enquiry today.";
+// Title was 82 characters and the description 217 — both truncated in the
+// SERP, so the words past the cut were doing no work. Trimmed to ~60 and ~155,
+// with the two things a buyer actually filters on kept in front: what we make
+// and where we make it.
+$page_title = 'Silk & Linen Fabric Manufacturer, Bhagalpur | Fabloom';
+$page_desc  = "Silk and linen fabric direct from our Bhagalpur mill — handloom, block print, digital print and custom shades, by the metre from 50 m. Request a swatch.";
 $page_canonical = SITE_URL . '/';
+// First hero slide — the LCP element on this page.
+$page_preload_image = SITE_URL . '/assets/images/slide1-jpg.webp';
 $page_schema = <<<'JSONLD'
 {
     "@context": "https://schema.org",
@@ -755,6 +761,13 @@ require_once __DIR__ . '/includes/header.php';
         </div>
       </div>
     </section>
+
+    <!-- ── FAQ ── -->
+    <?php faq_render(
+        $home_faqs,
+        'Frequently Asked Questions',
+        'The questions buyers ask before ordering silk and linen direct from a Bhagalpur mill.'
+    ); ?>
 
     <!-- ── INQUIRY CTA ── -->
     <section class="section bg-texture" aria-labelledby="inquiry-heading">

@@ -6,6 +6,26 @@ Options -Indexes
 
 RewriteEngine On
 
+# ── Canonical scheme and host ─────────────────────────────────
+# Until now http://, https://, www and non-www all answered 200, so every page
+# existed at four addresses and the checkout collected addresses and phone
+# numbers over plain HTTP. This runs FIRST, before any of the clean-URL rules
+# below, so a request is normalised in a single redirect rather than chained
+# through two.
+#
+# The %{HTTPS} test is paired with X-Forwarded-Proto: LiteSpeed sets %{HTTPS}
+# directly, but behind a proxy or CDN only the header is trustworthy, and
+# redirecting on the wrong signal is an infinite loop.
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://www.thefabloom.com%{REQUEST_URI} [R=301,L,QSA]
+
+# Non-www to www, on HTTPS. Matches the host used in canonical tags, the
+# sitemap and llms.txt, so all four agree.
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTP_HOST} !^$
+RewriteRule ^ https://www.thefabloom.com%{REQUEST_URI} [R=301,L,QSA]
+
 # ── Extensionless URLs ────────────────────────────────────────
 # /about  ->  about.php   (and /locations/silk-supplier-salem, etc.)
 #
@@ -49,9 +69,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^(.+?)/?$ /$1.php [L,QSA]
 
-# Force HTTPS (enable on live server)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# HTTPS is forced at the top of this file, before the rewrite rules.
 
 # Security headers
 <IfModule mod_headers.c>
@@ -59,6 +77,28 @@ RewriteRule ^(.+?)/?$ /$1.php [L,QSA]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set X-XSS-Protection "1; mode=block"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # HSTS. Deliberately short (1 day) and without preload: once a browser has
+  # cached this it will refuse plain HTTP for the whole max-age, so a long
+  # value is unforgiving of a certificate lapse. Raise to 31536000 and add
+  # preload only after the redirect above has run clean for a few weeks.
+  Header always set Strict-Transport-Security "max-age=86400" env=HTTPS
+</IfModule>
+
+# ── Compression ───────────────────────────────────────────────
+# CSS and JS were already served brotli-compressed, but HTML was not: the
+# homepage shipped 92KB of uncompressed markup on every request. HTML is the
+# most compressible thing on the site — it is mostly repeated tag names and
+# whitespace — so this is the single cheapest performance win available.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/ld+json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+
+  # Never compress what is already compressed.
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|zip|gz|mp4|woff2?)$ no-gzip dont-vary
 </IfModule>
 
 # Protect config directory.
@@ -89,7 +129,13 @@ RedirectMatch 404 ^/_backup-html/
   ExpiresByType image/webp "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType image/png  "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon  "access plus 1 month"
   ExpiresByType text/css   "access plus 1 week"
   ExpiresByType application/javascript "access plus 1 week"
+  # LiteSpeed serves .js as text/javascript, so the application/javascript rule
+  # above never matched and every script was re-downloaded on every visit.
+  ExpiresByType text/javascript        "access plus 1 week"
   ExpiresByType video/mp4  "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
