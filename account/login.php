@@ -14,10 +14,12 @@ if (is_logged_in()) {
 $errors = [];
 $form   = ['email' => '', 'remember' => false];
 
-// ── Handle "Forgot Password" click ─────────────────────────────────────────
+// ── Legacy "?forgot=1" link ────────────────────────────────────────────────
+// Self-service reset used to be a flash telling people to email the office.
+// The real flow now lives at /account/forgot-password; anything still pointing
+// at the old query string — a bookmark, an old email — lands there instead.
 if (isset($_GET['forgot'])) {
-    flash('info', 'Password reset is not yet available online. Please contact us at info@thefabloom.com and we will help you regain access.');
-    header('Location: ' . SITE_URL . '/account/login');
+    header('Location: ' . SITE_URL . '/account/forgot-password', true, 301);
     exit;
 }
 
@@ -227,7 +229,7 @@ $_flash_info = get_flash('info');
               <span class="form-checkbox__mark"></span>
               Remember me
             </label>
-            <a href="<?= h(SITE_URL . '/account/login?forgot=1') ?>" class="auth-link auth-link--muted">
+            <a href="<?= h(SITE_URL . '/account/forgot-password') ?>" class="auth-link auth-link--muted">
               Forgot password?
             </a>
           </div>

@@ -63,6 +63,11 @@ $page_schema   = $page_schema   ?? '';
   <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
   <link rel="stylesheet" href="<?= asset('css/responsive.css') ?>">
   <link rel="stylesheet" href="<?= asset('css/shop.css') ?>">
+<?php foreach (($page_extra_css ?? []) as $_css): ?>
+  <!-- Page-specific stylesheet, requested via $page_extra_css. Keeps sheets
+       that only two or three pages need out of the site-wide bundle. -->
+  <link rel="stylesheet" href="<?= asset($_css) ?>">
+<?php endforeach; ?>
 
   <link rel="icon" type="image/x-icon" href="<?= SITE_URL ?>/assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" href="<?= SITE_URL ?>/assets/favicon/apple-touch-icon.png">

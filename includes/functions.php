@@ -58,13 +58,26 @@ function send_notification(
     string $html_body,
     string $reply_to = '',
     string $reply_name = '',
-    array $attachments = []      // [['name' => ..., 'type' => ..., 'data' => raw bytes], ...]
+    array $attachments = [],     // [['name' => ..., 'type' => ..., 'data' => raw bytes], ...]
+    string $to_override = ''     // send to this address instead of the office inbox
 ): array {
     if (!function_exists('mail')) {
         return [false, 'PHP mail() is not available on this server'];
     }
 
+    // Everything else here notifies the office, so MAIL_TO is the default.
+    // Transactional mail addressed to a customer — a password reset link —
+    // passes the recipient explicitly. It is validated and stripped of CR/LF
+    // before use: an unchecked address in the To: header is the classic mail
+    // header-injection hole.
     $to = implode(', ', MAIL_TO);
+    if ($to_override !== '') {
+        $candidate = trim(str_replace(["\r", "\n", "\0"], '', $to_override));
+        if (!filter_var($candidate, FILTER_VALIDATE_EMAIL)) {
+            return [false, 'Invalid recipient address'];
+        }
+        $to = $candidate;
+    }
 
     // Header injection guard — a newline in any of these would let an
     // attacker append arbitrary headers via the form fields.
