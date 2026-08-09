@@ -1,0 +1,59 @@
+---
+# cPanel Git Version Control deployment.
+#
+# Runs when you press "Deploy HEAD Commit" in cPanel (Files > Git Version
+# Control > Manage > Pull or Deploy). cPanel checks the repository out into
+# ~/repositories/fabloom-website and then runs these tasks, so the working
+# directory is the repo, not public_html.
+#
+# Deliberately NOT copied:
+#   config/     — holds database.php with the live credentials. It exists only
+#                 on the server and is gitignored; copying the repo's config
+#                 directory over it would break the site.
+#   _backup-html/ — pre-conversion static copies, kept for reference. .htaccess
+#                 already 404s the path, and it has no business on the server.
+#   setup/      — the installer. /setup/install.php answered 200 to the public
+#                 internet; it is not redeployed.
+#
+# cp -R merges into the destination and does not delete files that were removed
+# from the repository. If you delete a file in git, remove it from the server by
+# hand as well.
+
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/thefablo/public_html
+    - export SRC=$(pwd)
+
+    # Directories
+    - /bin/cp -R $SRC/account   $DEPLOYPATH/
+    - /bin/cp -R $SRC/admin     $DEPLOYPATH/
+    - /bin/cp -R $SRC/api       $DEPLOYPATH/
+    - /bin/cp -R $SRC/assets    $DEPLOYPATH/
+    - /bin/cp -R $SRC/css       $DEPLOYPATH/
+    - /bin/cp -R $SRC/includes  $DEPLOYPATH/
+    - /bin/cp -R $SRC/js        $DEPLOYPATH/
+    - /bin/cp -R $SRC/locations $DEPLOYPATH/
+
+    # Root pages
+    - /bin/cp $SRC/index.php               $DEPLOYPATH/
+    - /bin/cp $SRC/about.php               $DEPLOYPATH/
+    - /bin/cp $SRC/products.php            $DEPLOYPATH/
+    - /bin/cp $SRC/product.php             $DEPLOYPATH/
+    - /bin/cp $SRC/infrastructure.php      $DEPLOYPATH/
+    - /bin/cp $SRC/blog.php                $DEPLOYPATH/
+    - /bin/cp $SRC/blog-post.php           $DEPLOYPATH/
+    - /bin/cp $SRC/contact.php             $DEPLOYPATH/
+    - /bin/cp $SRC/enquiry.php             $DEPLOYPATH/
+    - /bin/cp $SRC/cart.php                $DEPLOYPATH/
+    - /bin/cp $SRC/checkout.php            $DEPLOYPATH/
+    - /bin/cp $SRC/order-success.php       $DEPLOYPATH/
+    - /bin/cp $SRC/privacy-policy.php      $DEPLOYPATH/
+    - /bin/cp $SRC/terms-and-conditions.php $DEPLOYPATH/
+    - /bin/cp $SRC/refund-policy.php       $DEPLOYPATH/
+    - /bin/cp $SRC/disclaimer.php          $DEPLOYPATH/
+
+    # Static root files
+    - /bin/cp $SRC/.htaccess    $DEPLOYPATH/
+    - /bin/cp $SRC/robots.txt   $DEPLOYPATH/
+    - /bin/cp $SRC/sitemap.xml  $DEPLOYPATH/
+    - /bin/cp $SRC/llms.txt     $DEPLOYPATH/
