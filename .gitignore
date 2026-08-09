@@ -4,6 +4,13 @@
 # example and fill it in.
 /config/database.php
 
+# One-off maintenance endpoints. These set credentials or run privileged
+# queries; committing one to a public repository would publish a working
+# admin-password-reset URL.
+_admreset-*.php
+_stagecheck*.php
+_chk.php
+
 # Server-side and local noise
 error_log
 *.log
