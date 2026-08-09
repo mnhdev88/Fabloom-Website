@@ -168,6 +168,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn-login">Sign In</button>
         </form>
 
+        <!-- Admin accounts live in the same `users` table as customers, so the
+             account reset flow works here: the emailed link sets
+             users.password and leaves is_admin alone. There is no separate
+             admin reset to maintain. -->
+        <div class="back-link" style="margin-top:1rem">
+            <a href="<?= h(SITE_URL) ?>/account/forgot-password">Forgot your password?</a>
+        </div>
+
         <div class="back-link"><a href="<?= h(SITE_URL) ?>">← Back to Website</a></div>
     </div>
 </div>
