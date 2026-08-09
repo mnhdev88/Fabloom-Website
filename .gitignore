@@ -1,0 +1,26 @@
+# Live credentials. config/database.php holds the production database user and
+# password, so the repo carries database.example.php instead and the real file
+# lives only on the server. If you are setting up a new environment, copy the
+# example and fill it in.
+/config/database.php
+
+# Server-side and local noise
+error_log
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Pre-conversion static copies, kept locally for reference only
+/_backup-html/
+
+# Deployment artefacts — a site archive inside the web root is how the live DB
+# password ended up publicly downloadable once already.
+*.zip
+*.tar
+*.tar.gz
