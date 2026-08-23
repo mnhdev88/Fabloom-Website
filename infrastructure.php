@@ -82,7 +82,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
               <div style="padding:1rem 1.25rem;background:var(--clr-cream);border-radius:10px;border-left:3px solid var(--clr-red);">
                 <div style="font-weight:700;color:var(--clr-charcoal);font-size:1.1rem;">Est. 2009</div>
-                <div style="font-size:0.85rem;color:var(--clr-text-secondary);">15+ years of manufacturing excellence</div>
+                <div style="font-size:0.85rem;color:var(--clr-text-secondary);">45+ years of manufacturing excellence</div>
               </div>
             </div>
           </div>

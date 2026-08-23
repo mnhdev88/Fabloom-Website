@@ -140,7 +140,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Floating decorative badge -->
       <div class="hero-badge" style="position:absolute;top:25%;right:8%;z-index:3;background:rgba(192,40,42,0.12);border:1px solid rgba(192,40,42,0.3);backdrop-filter:blur(10px);border-radius:20px;padding:1.5rem 2rem;text-align:center;display:none;" aria-hidden="true">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#D93B3D;line-height:1;">15+</div>
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#D93B3D;line-height:1;">45+</div>
         <div style="font-size:0.7rem;color:rgba(255,255,255,0.6);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Years of Excellence</div>
       </div>
 
@@ -202,15 +202,15 @@ require_once __DIR__ . '/includes/header.php';
     <section class="stats-bar" aria-label="Company statistics">
       <div class="container">
         <div class="stats-grid">
-          <div class="stat-item reveal" aria-label="15 plus years of experience">
+          <div class="stat-item reveal" aria-label="45 plus years of experience">
             <div class="stat-number">
-              <span class="counter-val" data-target="15">0</span><span class="stat-suffix">+</span>
+              <span class="counter-val" data-target="45">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Years of Experience</div>
           </div>
-          <div class="stat-item reveal stagger-2" aria-label="500 plus products">
+          <div class="stat-item reveal stagger-2" aria-label="100 plus products">
             <div class="stat-number">
-              <span class="counter-val" data-target="500">0</span><span class="stat-suffix">+</span>
+              <span class="counter-val" data-target="100">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Products &amp; Variants</div>
           </div>
@@ -241,7 +241,7 @@ require_once __DIR__ . '/includes/header.php';
                  width="600" height="560"
                  onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80'">
             <div class="about-img-badge hero-badge">
-              <span class="badge-num">15+</span>
+              <span class="badge-num">45+</span>
               <div class="badge-text">Years of Craft</div>
             </div>
           </div>

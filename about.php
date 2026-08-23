@@ -74,7 +74,7 @@ require_once __DIR__ . '/includes/header.php';
                  loading="lazy" width="600" height="560"
                  onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80'">
             <div class="about-img-badge hero-badge">
-              <span class="badge-num">15+</span>
+              <span class="badge-num">45+</span>
               <div class="badge-text">Years of Craft</div>
             </div>
           </div>
@@ -289,8 +289,8 @@ require_once __DIR__ . '/includes/header.php';
             <div class="service-card__icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--clr-red)" stroke-width="1.8" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
             </div>
-            <h3 class="service-card__title">500+ Fabric Variants</h3>
-            <p class="service-card__desc">From natural weaves to digitally printed designs, our catalogue of over 500 fabric variants ensures you find the perfect textile for any application or aesthetic.</p>
+            <h3 class="service-card__title">100+ Fabric Variants</h3>
+            <p class="service-card__desc">From natural weaves to digitally printed designs, our catalogue of over 100 fabric variants ensures you find the perfect textile for any application or aesthetic.</p>
           </div>
 
           <div class="service-card reveal">
