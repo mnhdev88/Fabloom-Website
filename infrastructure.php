@@ -75,10 +75,14 @@ require_once __DIR__ . '/includes/header.php';
             <p style="color:var(--clr-text-secondary);line-height:1.85;margin-bottom:2rem;">
               The facility is capable of producing over 10,000 metres of finished fabric every month — across silk, linen, and blended categories — while maintaining the artisanal quality standards that Fabloom is renowned for.
             </p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;">
               <div style="padding:1rem 1.25rem;background:var(--clr-cream);border-radius:10px;border-left:3px solid var(--clr-red);">
                 <div style="font-weight:700;color:var(--clr-charcoal);font-size:1.1rem;">Mohiuddin Pur</div>
                 <div style="font-size:0.85rem;color:var(--clr-text-secondary);">Habibpur, Bhagalpur, Bihar 813113</div>
+              </div>
+              <div style="padding:1rem 1.25rem;background:var(--clr-cream);border-radius:10px;border-left:3px solid var(--clr-red);">
+                <div style="font-weight:700;color:var(--clr-charcoal);font-size:1.1rem;">Block Print Office</div>
+                <div style="font-size:0.85rem;color:var(--clr-text-secondary);">Sector 62, Noida, Uttar Pradesh</div>
               </div>
               <div style="padding:1rem 1.25rem;background:var(--clr-cream);border-radius:10px;border-left:3px solid var(--clr-red);">
                 <div style="font-weight:700;color:var(--clr-charcoal);font-size:1.1rem;">Est. 1979</div>
