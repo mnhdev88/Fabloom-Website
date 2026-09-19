@@ -42,7 +42,6 @@
             <li><a href="<?= SITE_URL ?>/products?cat=block-print">Block Print Fabric</a></li>
             <li><a href="<?= SITE_URL ?>/products?cat=digital-print">Digital Print Fabric</a></li>
             <li><a href="<?= SITE_URL ?>/products?cat=hand-brush">Hand Brush Work</a></li>
-            <li><a href="<?= SITE_URL ?>/products?cat=saree">Sarees</a></li>
           </ul>
         </div>
 

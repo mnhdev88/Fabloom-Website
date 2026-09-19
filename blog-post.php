@@ -128,7 +128,7 @@ require_once __DIR__ . '/includes/header.php';
                 <?php foreach ([
                     'Pure Silk' => 'silk', 'Pure Linen' => 'linen',
                     'Block Print' => 'block-print', 'Digital Print' => 'digital-print',
-                    'Hand Brush Work' => 'hand-brush', 'Sarees' => 'saree',
+                    'Hand Brush Work' => 'hand-brush',
                 ] as $label => $cat): ?>
                 <li>
                   <a href="<?= SITE_URL ?>/products?cat=<?= h($cat) ?>"

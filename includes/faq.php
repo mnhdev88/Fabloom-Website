@@ -31,7 +31,7 @@ function faq_general(): array
     return [
         [
             'q' => 'What is the minimum order quantity for Fabloom fabric?',
-            'a' => "The minimum order is {$min} metres per design and colour on woven fabric, because a shorter length cannot be cut from the loom lot. Printed fabric is a different case: block print and digital print are both applied to cloth that is already woven, so they are supplied from " . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? $min) . " metres. Sarees are sold as individual pieces, so the metre minimum does not apply to them.",
+            'a' => "The minimum order is {$min} metres per design and colour on woven fabric, because a shorter length cannot be cut from the loom lot. Printed fabric is a different case: block print and digital print are both applied to cloth that is already woven, so they are supplied from " . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? $min) . " metres.",
         ],
         [
             'q' => 'Does Fabloom manufacture the fabric itself?',
@@ -156,20 +156,6 @@ function faq_for_category(string $slug): array
             [
                 'q' => 'Can hand brush work be done in a custom design?',
                 'a' => 'Yes. Hand brush work is commissioned to your motif, colour palette and placement, which is why it is used for exclusive collections and one-off pieces. Lead times are longer than printed fabric because each length is painted by hand.',
-            ],
-        ],
-        'saree' => [
-            [
-                'q' => 'Are Fabloom sarees sold by the piece or by the metre?',
-                'a' => 'Sarees are sold as complete individual pieces, not by the metre, so the ' . (int) MIN_ORDER_METRES . '-metre fabric minimum does not apply. Each saree is woven and finished as a single unit with its pallu and border.',
-            ],
-            [
-                'q' => 'What kind of sarees does Fabloom weave?',
-                'a' => 'Fabloom weaves handloom tussar and mulberry silk sarees in Bhagalpur, including plain and zari-bordered pieces, block printed and hand brush worked sarees, and embroidered designs. Bulk and wholesale saree orders are quoted against enquiry.',
-            ],
-            [
-                'q' => 'How should a handloom silk saree be stored?',
-                'a' => 'Store a handloom silk saree wrapped in cotton muslin, not plastic, and refold it along a different line every few months so a permanent crease does not set into the zari. Keep it away from direct sunlight and damp.',
             ],
         ],
     ];

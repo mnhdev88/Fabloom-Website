@@ -52,6 +52,15 @@ RewriteCond %{REQUEST_METHOD} =GET
 RewriteCond %{THE_REQUEST} \s/+product(\.php)?\?slug=([A-Za-z0-9._-]+)[\s&] [NC]
 RewriteRule ^ /product/%2? [R=301,L]
 
+# 2c. Retired saree category (removed 2026-09-19). Both product URLs and the
+# category view were in sitemap.xml and are likely indexed, so they redirect to
+# the catalogue rather than starting to 404. These run before rule 3c, which
+# would otherwise hand the slugs to product.php and render the 404 page.
+RewriteRule ^product/hand-crafted-silk-saree-zari/?$   /products [R=301,L]
+RewriteRule ^product/hand-crafted-saree-embroidered/?$ /products [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)cat=saree(&|$) [NC]
+RewriteRule ^products/?$ /products? [R=301,L]
+
 # 3. Any other visible .php URL -> clean URL, GET only, never under api/
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteCond %{THE_REQUEST} \s/+(?!api/)([^\s?]+)\.php[\s?] [NC]
