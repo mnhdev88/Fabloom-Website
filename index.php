@@ -1,6 +1,14 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
 
+// The home "Insights" strip is the first three published entries from the same
+// array /blog reads, so a card here can never show a title, image or link that
+// the blog index does not have.
+$home_posts = array_slice(
+    array_values(array_filter(require __DIR__ . '/includes/posts.php', fn($p) => $p['published'])),
+    0, 3
+);
+
 // Title was 82 characters and the description 217 — both truncated in the
 // SERP, so the words past the cut were doing no work. Trimmed to ~60 and ~155,
 // with the two things a buyer actually filters on kept in front: what we make
@@ -175,11 +183,11 @@ require_once __DIR__ . '/includes/header.php';
           <div class="hero-anim-5" style="display:flex;align-items:center;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);">
             <div style="text-align:center;">
               <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#D93B3D;">100%</div>
-              <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;">Natural Fibres</div>
+              <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;">Natural Yarn</div>
             </div>
             <div style="width:1px;height:36px;background:rgba(255,255,255,0.1);"></div>
             <div style="text-align:center;">
-              <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#D93B3D;">500+</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#D93B3D;">50+</div>
               <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;">Products</div>
             </div>
             <div style="width:1px;height:36px;background:rgba(255,255,255,0.1);"></div>
@@ -493,13 +501,13 @@ require_once __DIR__ . '/includes/header.php';
         <div class="process-steps mt-12 stagger-children">
           <div class="process-step reveal">
             <div class="process-step__num">01</div>
-            <h3>Design</h3>
-            <p>Conceptualising patterns — from traditional motifs to contemporary prints.</p>
+            <h3>Weave</h3>
+            <p>Master weavers craft fabric on handlooms and power looms with precision.</p>
           </div>
           <div class="process-step reveal">
             <div class="process-step__num">02</div>
-            <h3>Weave</h3>
-            <p>Master weavers craft fabric on handlooms and power looms with precision.</p>
+            <h3>Design</h3>
+            <p>Conceptualising patterns — from traditional motifs to contemporary prints.</p>
           </div>
           <div class="process-step reveal">
             <div class="process-step__num">03</div>
@@ -689,72 +697,31 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="grid-3 mt-12 stagger-children">
+          <?php foreach ($home_posts as $hp): ?>
           <article class="blog-card reveal">
-            <div class="blog-card__img">
-              <img src="assets/images/blog1.jpeg"
-                   alt="How to Care for Silk Fabric – Fabloom Blog"
-                   loading="lazy" width="400" height="250"
-                   onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&q=80'">
-            </div>
+            <a href="<?= SITE_URL ?>/blog/<?= h($hp['slug']) ?>" class="blog-card__img" style="display:block;">
+              <img src="<?= SITE_URL ?>/assets/images/blog/<?= h($hp['image']) ?>"
+                   alt="<?= h($hp['title']) ?>"
+                   loading="lazy" width="400" height="250">
+            </a>
             <div class="blog-card__body">
               <div class="blog-card__meta">
-                <span class="tag tag-gold">Silk Care</span>
-                <span class="blog-card__date">April 12, 2025</span>
+                <span class="blog-card__date"><time datetime="<?= h($hp['date']) ?>"><?= h($hp['display']) ?></time></span>
+                <span class="blog-card__date"><?= h($hp['read']) ?></span>
               </div>
-              <h3 class="blog-card__title">How to Care for Pure Silk Fabric at Home</h3>
-              <p class="blog-card__excerpt">Pure silk is a delicate and luxurious fibre that requires gentle care. Learn the right washing, drying, and storage techniques to keep your silk fabrics in pristine condition for years.</p>
-              <a href="blog-post" class="blog-card__read">
-                Read More
+              <h3 class="blog-card__title"><a href="<?= SITE_URL ?>/blog/<?= h($hp['slug']) ?>"><?= h($hp['title']) ?></a></h3>
+              <p class="blog-card__excerpt"><?= h($hp['excerpt']) ?></p>
+              <a href="<?= SITE_URL ?>/blog/<?= h($hp['slug']) ?>" class="blog-card__read">
+                Read article
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
           </article>
-
-          <article class="blog-card reveal">
-            <div class="blog-card__img">
-              <img src="assets/images/blog2.jpeg"
-                   alt="The Heritage of Bhagalpur Silk – Fabloom Blog"
-                   loading="lazy" width="400" height="250"
-                   onerror="this.src='https://images.unsplash.com/photo-1524678714210-9917a6c619c2?w=400&h=250&q=80'">
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span class="tag tag-gold">Heritage</span>
-                <span class="blog-card__date">March 28, 2025</span>
-              </div>
-              <h3 class="blog-card__title">The Glorious Heritage of Bhagalpur Silk Weaving</h3>
-              <p class="blog-card__excerpt">Bhagalpur – the Silk City of India – has been producing some of the world's finest textured silk for over a millennium. Discover the history, the artisans, and the craft behind this legendary tradition.</p>
-              <a href="blog-post" class="blog-card__read">
-                Read More
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            </div>
-          </article>
-
-          <article class="blog-card reveal">
-            <div class="blog-card__img">
-              <img src="assets/images/blog3.webp"
-                   alt="Linen vs Cotton – Which Fabric to Choose – Fabloom Blog"
-                   loading="lazy" width="400" height="250"
-                   onerror="this.src='https://images.unsplash.com/photo-1612460627030-3b78c1cf0e57?w=400&h=250&q=80'">
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span class="tag tag-gold">Linen</span>
-                <span class="blog-card__date">February 15, 2025</span>
-              </div>
-              <h3 class="blog-card__title">Linen vs Cotton: Which Fabric is Right for You?</h3>
-              <p class="blog-card__excerpt">Both linen and cotton are natural, breathable fabrics — but they differ significantly in texture, durability, and use. This guide breaks down everything you need to know to choose the right fabric for your project.</p>
-              <a href="blog-post" class="blog-card__read">
-                Read More
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            </div>
-          </article>
+          <?php endforeach; ?>
         </div>
 
         <div style="text-align:center;margin-top:3rem;">
-          <a href="blog" class="btn btn-outline reveal">
+          <a href="<?= SITE_URL ?>/blog" class="btn btn-outline reveal">
             View All Articles
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
