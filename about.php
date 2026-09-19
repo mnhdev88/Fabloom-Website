@@ -17,7 +17,7 @@ $page_schema = <<<'JSONLD'
         "url": "https://www.thefabloom.com",
         "telephone": "+919760058796",
         "email": "info@thefabloom.com",
-        "foundingDate": "2009",
+        "foundingDate": "1979",
         "description": "India's premier silk and linen fabric manufacturer based in Bhagalpur, Bihar. Specialising in handloom fabrics, block printing, digital printing, and custom textile solutions.",
         "address": {
           "@type": "PostalAddress",
@@ -80,11 +80,11 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <div class="about-split__content reveal-right">
-            <span class="section-label">Est. 2009</span>
+            <span class="section-label">Est. 1979</span>
             <h2 class="section-title" id="story-heading">The Fabloom Story</h2>
             <div class="gold-divider"></div>
             <p style="margin-top:1.5rem;color:var(--clr-text-secondary);line-height:1.85;margin-bottom:1rem;">
-              Fabloom Group of Company was founded in 2009 in the heart of Bhagalpur, Bihar — India's legendary Silk City. What began as a small handloom workshop driven by a passion for authentic textiles has grown into one of India's most trusted fabric manufacturers, blending centuries-old weaving traditions with contemporary design sensibilities.
+              Fabloom Group of Company was founded in 1979 in the heart of Bhagalpur, Bihar — India's legendary Silk City. What began as a small handloom workshop driven by a passion for authentic textiles has grown into one of India's most trusted fabric manufacturers, blending centuries-old weaving traditions with contemporary design sensibilities.
             </p>
             <p style="color:var(--clr-text-secondary);line-height:1.85;margin-bottom:1rem;">
               Our roots run deep in the handloom heritage of Bhagalpur. Every artisan who works at Fabloom carries knowledge passed down through generations — knowledge of warp and weft, of natural dyes, of the subtle art of creating fabrics that breathe, drape, and endure. We honour this heritage every day, while continuously innovating to meet the demands of modern fashion, home décor, and export markets.
@@ -201,17 +201,17 @@ require_once __DIR__ . '/includes/header.php';
           <span class="section-label">Our Journey</span>
           <h2 class="section-title" id="timeline-heading">Manufacturing Milestones</h2>
           <div class="gold-divider"></div>
-          <p class="section-subtitle mt-4">Fifteen years of weaving excellence — one milestone at a time.</p>
+          <p class="section-subtitle mt-4">Over four decades of weaving excellence — one milestone at a time.</p>
         </div>
 
         <div class="timeline mt-12" style="position:relative;max-width:800px;margin-left:auto;margin-right:auto;">
           <!-- Vertical line -->
           <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--clr-red),rgba(192,40,42,0.2));transform:translateX(-50%);z-index:0;" aria-hidden="true"></div>
 
-          <!-- 2009 -->
+          <!-- 1979 -->
           <div class="timeline-item reveal" style="display:flex;align-items:flex-start;gap:2rem;margin-bottom:3rem;position:relative;z-index:1;">
             <div style="flex:1;text-align:right;padding-right:2rem;">
-              <div class="tag tag-gold" style="display:inline-block;margin-bottom:0.75rem;">2009</div>
+              <div class="tag tag-gold" style="display:inline-block;margin-bottom:0.75rem;">1979</div>
               <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--clr-charcoal);margin-bottom:0.5rem;">The Founding</h3>
               <p style="color:var(--clr-text-secondary);line-height:1.75;font-size:0.9375rem;">Fabloom was established in Mohiuddin Pur, Bhagalpur with a small team of five master weavers and a clear vision: to make authentic Bhagalpur silk and linen accessible to the world.</p>
             </div>
