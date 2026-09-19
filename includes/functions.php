@@ -232,12 +232,14 @@ function product_unit(array $p): string {
 
 /**
  * Categories whose minimum cut differs from MIN_ORDER_METRES, keyed by
- * category slug. Block print is struck by hand a repeat at a time rather than
- * run off a loom lot, so it can be cut far shorter than woven yardage.
+ * category slug. Both print lines are applied to already-woven cloth — block
+ * print a repeat at a time by hand, digital print straight from the file — so
+ * neither has to come off a full loom lot the way woven yardage does.
  * Anything not listed here falls back to the standard fabric minimum.
  */
 const MIN_ORDER_BY_CATEGORY = [
-    'block-print' => 5,
+    'block-print'   => 5,
+    'digital-print' => 5,
 ];
 
 /** Smallest quantity that may be ordered. */

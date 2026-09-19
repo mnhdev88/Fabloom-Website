@@ -87,7 +87,7 @@ require __DIR__ . '/includes/legal-hero.php';
             <h2>3. Pricing and minimum order</h2>
             <ul>
               <li>Prices are shown in Indian Rupees (<?= h(CURRENCY) ?>) and are quoted per metre unless stated otherwise.</li>
-              <li>The minimum order for a fabric is <strong><?= (int)MIN_ORDER_METRES ?> metres</strong> per design or colour, unless we agree otherwise in writing. Hand block printed fabric carries a lower minimum of <strong><?= (int)(MIN_ORDER_BY_CATEGORY['block-print'] ?? MIN_ORDER_METRES) ?> metres</strong>. The minimum that applies to an item is shown on its product page.</li>
+              <li>The minimum order for a fabric is <strong><?= (int)MIN_ORDER_METRES ?> metres</strong> per design or colour, unless we agree otherwise in writing. Printed fabric, both block print and digital print, carries a lower minimum of <strong><?= (int)(MIN_ORDER_BY_CATEGORY['block-print'] ?? MIN_ORDER_METRES) ?> metres</strong>. The minimum that applies to an item is shown on its product page.</li>
               <li>We may correct an obvious pricing or typographical error at any time before dispatch. If a price has been listed incorrectly, we will tell you and you may confirm the corrected price or cancel the order at no cost.</li>
               <li>Prices may change without notice. The price applicable to your order is the one confirmed at the time the order is placed.</li>
               <li>Bulk, wholesale and export pricing is quoted separately against an <a href="<?= SITE_URL ?>/enquiry">enquiry</a> and may carry its own agreed terms.</li>

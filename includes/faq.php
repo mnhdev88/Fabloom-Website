@@ -31,7 +31,7 @@ function faq_general(): array
     return [
         [
             'q' => 'What is the minimum order quantity for Fabloom fabric?',
-            'a' => "The minimum order is {$min} metres per design and colour for woven and digitally printed fabric, because a shorter length cannot be cut from the loom lot. Hand block printed fabric is struck a repeat at a time rather than run as a loom lot, so it is supplied from " . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? $min) . " metres. Sarees are sold as individual pieces, so the metre minimum does not apply to them.",
+            'a' => "The minimum order is {$min} metres per design and colour on woven fabric, because a shorter length cannot be cut from the loom lot. Printed fabric is a different case: block print and digital print are both applied to cloth that is already woven, so they are supplied from " . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? $min) . " metres. Sarees are sold as individual pieces, so the metre minimum does not apply to them.",
         ],
         [
             'q' => 'Does Fabloom manufacture the fabric itself?',
@@ -111,7 +111,7 @@ function faq_for_category(string $slug): array
         'block-print' => [
             [
                 'q' => 'What is the minimum order for block printed fabric?',
-                'a' => 'Block printed fabric is supplied from ' . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? MIN_ORDER_METRES) . ' metres per design and colour, well below the ' . (int) MIN_ORDER_METRES . '-metre minimum that applies to woven and digitally printed yardage. The print is struck by hand a repeat at a time, so a short length does not have to come off a full loom lot.',
+                'a' => 'Block printed fabric is supplied from ' . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? MIN_ORDER_METRES) . ' metres per design and colour, well below the ' . (int) MIN_ORDER_METRES . '-metre minimum that applies to woven yardage. The print is struck by hand a repeat at a time onto cloth that is already woven, so a short length does not have to come off a full loom lot.',
             ],
             [
                 'q' => 'How is hand block printing different from screen printing?',
@@ -128,12 +128,16 @@ function faq_for_category(string $slug): array
         ],
         'digital-print' => [
             [
+                'q' => 'What is the minimum order for digitally printed fabric?',
+                'a' => 'Digitally printed fabric is supplied from ' . (int) (MIN_ORDER_BY_CATEGORY['digital-print'] ?? MIN_ORDER_METRES) . ' metres per design, against the ' . (int) MIN_ORDER_METRES . '-metre minimum that applies to woven yardage. The design is printed straight from the file onto cloth that is already woven, so there is no loom lot to cut from and a short run costs no more per metre to set up.',
+            ],
+            [
                 'q' => 'How accurate is the colour in a digital print?',
                 'a' => 'Digital printing reproduces artwork far more precisely than block or screen printing, holding fine gradients, photographic detail and unlimited colours in a single pass. A strike-off on your chosen base cloth is still the only reliable way to confirm shade, because the same file prints differently on linen, silk and cotton.',
             ],
             [
                 'q' => 'Can Fabloom digitally print my own artwork?',
-                'a' => 'Yes. Supply print-ready artwork at 300 DPI with the repeat size specified, and Fabloom will run a strike-off before production. Custom digital prints run against the standard ' . (int) MIN_ORDER_METRES . '-metre minimum per design, and the artwork remains yours.',
+                'a' => 'Yes. Supply print-ready artwork at 300 DPI with the repeat size specified, and Fabloom will run a strike-off before production. Custom digital prints run against the ' . (int) (MIN_ORDER_BY_CATEGORY['digital-print'] ?? MIN_ORDER_METRES) . '-metre digital print minimum per design, and the artwork remains yours.',
             ],
             [
                 'q' => 'Which fabrics can be digitally printed?',
@@ -184,8 +188,8 @@ function faq_for_product(array $p): array
     $out     = [];
     $name    = (string) $p['name'];
     $isMetre = function_exists('product_is_metre') ? product_is_metre($p) : true;
-    // The minimum is per category (block print cuts far shorter), so read it
-    // from the product rather than assuming the standard fabric lot.
+    // The minimum is per category (both print lines cut far shorter), so read
+    // it from the product rather than assuming the standard fabric lot.
     $min     = function_exists('product_min_qty') && $isMetre
         ? product_min_qty($p)
         : (int) MIN_ORDER_METRES;
