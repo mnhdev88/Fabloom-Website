@@ -31,7 +31,7 @@ function faq_general(): array
     return [
         [
             'q' => 'What is the minimum order quantity for Fabloom fabric?',
-            'a' => "The minimum order is {$min} metres per design and colour. Orders below {$min} metres cannot be cut from the loom lot. Sarees are sold as individual pieces, so the metre minimum does not apply to them.",
+            'a' => "The minimum order is {$min} metres per design and colour for woven and digitally printed fabric, because a shorter length cannot be cut from the loom lot. Hand block printed fabric is struck a repeat at a time rather than run as a loom lot, so it is supplied from " . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? $min) . " metres. Sarees are sold as individual pieces, so the metre minimum does not apply to them.",
         ],
         [
             'q' => 'Does Fabloom manufacture the fabric itself?',
@@ -110,6 +110,10 @@ function faq_for_category(string $slug): array
         ],
         'block-print' => [
             [
+                'q' => 'What is the minimum order for block printed fabric?',
+                'a' => 'Block printed fabric is supplied from ' . (int) (MIN_ORDER_BY_CATEGORY['block-print'] ?? MIN_ORDER_METRES) . ' metres per design and colour, well below the ' . (int) MIN_ORDER_METRES . '-metre minimum that applies to woven and digitally printed yardage. The print is struck by hand a repeat at a time, so a short length does not have to come off a full loom lot.',
+            ],
+            [
                 'q' => 'How is hand block printing different from screen printing?',
                 'a' => 'Hand block printing presses dye into the cloth with a hand-carved wooden block, one colour and one impression at a time, so each repeat differs very slightly and the print sits into the weave. Screen printing pushes ink through a mesh mechanically, producing a flatter and perfectly uniform repeat. Fabloom block prints are struck by hand in Bhagalpur.',
             ],
@@ -180,7 +184,11 @@ function faq_for_product(array $p): array
     $out     = [];
     $name    = (string) $p['name'];
     $isMetre = function_exists('product_is_metre') ? product_is_metre($p) : true;
-    $min     = (int) MIN_ORDER_METRES;
+    // The minimum is per category (block print cuts far shorter), so read it
+    // from the product rather than assuming the standard fabric lot.
+    $min     = function_exists('product_min_qty') && $isMetre
+        ? product_min_qty($p)
+        : (int) MIN_ORDER_METRES;
 
     $width = trim((string) ($p['width_inches'] ?? ''));
     $gsm   = trim((string) ($p['weight_gsm'] ?? ''));

@@ -57,8 +57,9 @@ $eff_price  = product_price($product);
 $disc       = discount_pct($product);
 $stock      = (int)$product['stock'];
 
-// Fabric sells by the metre with a 50 m minimum, so the old "max 10" cap
-// would have put the ceiling below the floor and made ordering impossible.
+// Fabric sells by the metre against a per-category minimum (50 m for loom-lot
+// yardage, 5 m for block print), so the old "max 10" cap would have put the
+// ceiling below the floor and made ordering impossible.
 $min_qty    = product_min_qty($product);
 $max_qty    = product_max_qty($product);
 $can_order  = product_in_stock($product);
@@ -673,8 +674,10 @@ faq_render(
   if (qtyInput) {
     var maxQty = parseInt(qtyInput.getAttribute('max'), 10) || 10;
     var minQty = parseInt(qtyInput.getAttribute('min'), 10) || 1;
-    /* Fabric moves in 10 m steps above the 50 m minimum; sarees step by 1. */
-    var stepQty = minQty > 1 ? 10 : 1;
+    /* Step in round multiples of the item's own minimum: 10 m for the 50 m
+       loom-lot fabrics, 5 m for block print, 1 for sarees. Stepping a 5 m
+       minimum by 10 would land on 5, 15, 25 and never a round length. */
+    var stepQty = minQty >= 50 ? 10 : (minQty > 1 ? minQty : 1);
 
     function syncButtons() {
       var v = parseInt(qtyInput.value, 10) || minQty;

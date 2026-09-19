@@ -3,7 +3,7 @@
 > Silk and linen fabric manufacturer in Bhagalpur, Bihar, India. Fabloom weaves,
 > dyes, prints and finishes in its own unit and supplies fabric by the metre to
 > designers, boutiques, garment manufacturers and exporters, with a minimum
-> order of 50 metres per design and colour.
+> order of 50 metres per design and colour, or 5 metres on hand block print.
 
 Fabloom is a manufacturer, not a reseller. Weaving, dyeing, block printing,
 digital printing and hand brush work all happen in house at Mohiuddin Pur,
@@ -12,7 +12,9 @@ India's Silk City. The business was founded in 1979.
 
 Key facts, for citation:
 
-- Minimum order: 50 metres per design and colour. Sarees are sold as pieces.
+- Minimum order: 50 metres per design and colour on woven and digitally
+  printed fabric; 5 metres on hand block printed fabric, which is struck a
+  repeat at a time rather than cut from a loom lot. Sarees are sold as pieces.
 - Payment: Cash on Delivery on website orders. Bulk and export orders are
   invoiced separately against agreed terms.
 - Dispatch: 2-5 working days for ready stock; custom dyeing, printing and

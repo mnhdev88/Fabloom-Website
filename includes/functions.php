@@ -209,9 +209,10 @@ function discount_pct(array $p): int {
 
 // ── Units and minimum order ───────────────────────────────────
 /**
- * Fabric is sold by the metre with a 50 m minimum. Sarees are sold as a
+ * Fabric is sold by the metre against a minimum cut. Sarees are sold as a
  * finished piece, so they must not inherit either rule — quoting a saree
- * "per metre, minimum 50" would be nonsense.
+ * "per metre, minimum 50" would be nonsense. See MIN_ORDER_BY_CATEGORY for
+ * the categories that cut shorter than MIN_ORDER_METRES.
  */
 function product_is_metre(array $p): bool {
     $slug = strtolower((string)($p['cat_slug'] ?? $p['category_slug'] ?? ''));
@@ -229,9 +230,21 @@ function product_unit(array $p): string {
     return product_is_metre($p) ? 'm' : 'piece';
 }
 
+/**
+ * Categories whose minimum cut differs from MIN_ORDER_METRES, keyed by
+ * category slug. Block print is struck by hand a repeat at a time rather than
+ * run off a loom lot, so it can be cut far shorter than woven yardage.
+ * Anything not listed here falls back to the standard fabric minimum.
+ */
+const MIN_ORDER_BY_CATEGORY = [
+    'block-print' => 5,
+];
+
 /** Smallest quantity that may be ordered. */
 function product_min_qty(array $p): int {
-    return product_is_metre($p) ? (int) MIN_ORDER_METRES : 1;
+    if (!product_is_metre($p)) return 1;
+    $slug = strtolower((string)($p['cat_slug'] ?? $p['category_slug'] ?? ''));
+    return (int) (MIN_ORDER_BY_CATEGORY[$slug] ?? MIN_ORDER_METRES);
 }
 
 /** Price with its unit suffix, e.g. "₹1,050.00 / m". */
@@ -254,7 +267,7 @@ function product_max_qty(array $p): int {
 /** Human note for the minimum, or '' when there is no minimum. */
 function min_order_note(array $p): string {
     return product_is_metre($p)
-        ? 'Minimum order ' . (int) MIN_ORDER_METRES . ' metres'
+        ? 'Minimum order ' . product_min_qty($p) . ' metres'
         : '';
 }
 

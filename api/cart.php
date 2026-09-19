@@ -68,8 +68,8 @@ switch ($action) {
         $product_id = (int) ($_POST['product_id'] ?? 0);
         $qty        = max(1, (int) ($_POST['qty'] ?? 1));
 
-        // The 50 m minimum has to be enforced here, not just in the form:
-        // anything client-side can be posted around.
+        // The per-category minimum has to be enforced here, not just in the
+        // form: anything client-side can be posted around.
         $qty = enforce_min_qty($product_id, $qty);
 
         if ($product_id <= 0) {
