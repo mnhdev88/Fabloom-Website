@@ -11,6 +11,17 @@
 @media (max-width: 1280px) {
   .footer__grid { gap: var(--sp-8); }
   .process-steps { grid-template-columns: repeat(5, 1fr); gap: var(--sp-2); }
+  .nav-link { padding-inline: var(--sp-3); }
+  .nav-link::after { left: var(--sp-3); right: var(--sp-3); }
+}
+
+/* ── Below 1200px: nav only ──
+   Eight top-level links plus cart and login no longer fit on one row here,
+   so the hamburger takes over before the 1024px tablet breakpoint. */
+@media (max-width: 1199px) {
+  .nav-menu { display: none; }
+  .nav-cta.desktop-only { display: none; }
+  .hamburger { display: flex; }
 }
 
 /* ── Below 1024px (Tablet) ── */

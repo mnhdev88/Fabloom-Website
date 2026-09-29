@@ -26,6 +26,7 @@
             <li><a href="<?= SITE_URL ?>/">Home</a></li>
             <li><a href="<?= SITE_URL ?>/about">About Us</a></li>
             <li><a href="<?= SITE_URL ?>/products">Products</a></li>
+            <li><a href="<?= SITE_URL ?>/custom-block-design">Custom Block Design</a></li>
             <li><a href="<?= SITE_URL ?>/infrastructure">Infrastructure</a></li>
             <li><a href="<?= SITE_URL ?>/blog">Blog</a></li>
             <li><a href="<?= SITE_URL ?>/contact">Contact</a></li>
