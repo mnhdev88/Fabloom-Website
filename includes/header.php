@@ -148,11 +148,12 @@ $page_schema   = $page_schema   ?? '';
         <div class="nav-item"><a href="<?= SITE_URL ?>/about" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'about.php' ? 'active' : '' ?>">About</a></div>
         <div class="nav-item"><a href="<?= SITE_URL ?>/products" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'products.php' ? 'active' : '' ?>">Products</a></div>
         <div class="nav-item">
-          <a href="<?= SITE_URL ?>/custom-block-design" class="nav-link <?= in_array(basename($_SERVER['PHP_SELF']), ['custom-block-design.php'], true) ? 'active' : '' ?>" aria-haspopup="true">
+          <a href="<?= SITE_URL ?>/custom-block-design" class="nav-link <?= in_array(basename($_SERVER['PHP_SELF']), ['block-printing.php', 'custom-block-design.php'], true) ? 'active' : '' ?>" aria-haspopup="true">
             Services
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </a>
           <div class="nav-dropdown" role="menu">
+            <a href="<?= SITE_URL ?>/block-printing" role="menuitem">Block Printing</a>
             <a href="<?= SITE_URL ?>/custom-block-design" role="menuitem">Custom Block Design</a>
           </div>
         </div>
@@ -215,6 +216,7 @@ $page_schema   = $page_schema   ?? '';
       <a href="<?= SITE_URL ?>/products">Products</a>
       <a href="<?= SITE_URL ?>/custom-block-design">Services</a>
       <div class="mobile-nav-sub">
+        <a href="<?= SITE_URL ?>/block-printing">Block Printing</a>
         <a href="<?= SITE_URL ?>/custom-block-design">Custom Block Design</a>
       </div>
       <a href="<?= SITE_URL ?>/infrastructure">Infrastructure</a>
