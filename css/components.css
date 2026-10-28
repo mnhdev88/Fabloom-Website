@@ -502,6 +502,9 @@
 
 .about-split__content { flex: 1; }
 
+/* Image column sized by the layout, not by the photo's own pixel width. */
+.about-split__media { flex: 0 0 45%; min-width: 0; }
+
 @media (max-width: 1024px) {
   .about-split {
     gap: var(--sp-10);

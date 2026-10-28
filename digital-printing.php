@@ -121,7 +121,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
             </div>
           </div>
-          <div class="reveal-right">
+          <div class="about-split__media reveal-right">
             <img src="assets/images/services/digital-printed-peony-fabric.webp"
                  alt="Lengths of digitally printed fabric with large painterly pink peonies hanging on Fabloom's lit inspection frame"
                  width="738" height="1600" fetchpriority="high"
@@ -135,11 +135,11 @@ require_once __DIR__ . '/includes/header.php';
     <section class="section bg-cream" aria-labelledby="studio-heading">
       <div class="container">
         <div class="about-split" style="gap:4rem;align-items:center;">
-          <div class="reveal-left">
+          <div class="about-split__media reveal-left">
             <img src="assets/images/services/textile-designer-floral-repeat.webp"
                  alt="Fabloom textile designer working on a rose floral repeat with a pen tablet in the design studio"
                  loading="lazy" width="1160" height="738"
-                 style="width:100%;aspect-ratio:4/3;border-radius:16px;object-fit:cover;object-position:40% center;">
+                 style="width:100%;aspect-ratio:4/3;border-radius:16px;object-fit:cover;object-position:30% center;">
           </div>
           <div class="about-split__content reveal-right">
             <span class="section-label">In-House Design Studio</span>
@@ -177,7 +177,7 @@ require_once __DIR__ . '/includes/header.php';
               Printed lengths are then fixed, finished and inspected under light, panel by panel, before they are packed.
             </p>
           </div>
-          <div class="reveal-right">
+          <div class="about-split__media reveal-right">
             <img src="assets/images/services/digital-print-operator-rip.webp"
                  alt="Operator preparing a print job in RIP software beside Fabloom's Konica Minolta Nassenger 8 digital textile printer"
                  loading="lazy" width="568" height="1600"
