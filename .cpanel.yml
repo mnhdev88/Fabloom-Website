@@ -41,6 +41,7 @@ deployment:
     - /bin/cp $SRC/product.php             $DEPLOYPATH/
     - /bin/cp $SRC/infrastructure.php      $DEPLOYPATH/
     - /bin/cp $SRC/block-printing.php      $DEPLOYPATH/
+    - /bin/cp $SRC/digital-printing.php    $DEPLOYPATH/
     - /bin/cp $SRC/custom-block-design.php $DEPLOYPATH/
     - /bin/cp $SRC/blog.php                $DEPLOYPATH/
     - /bin/cp $SRC/blog-post.php           $DEPLOYPATH/
